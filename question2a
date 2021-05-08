@@ -1,0 +1,21 @@
+# a
+def best_mat_mult_time(L):
+    #run time A*B: m_(i)*m_(i+1)*m_(i+2)
+    #Stop condition:
+    if len(L)==3:
+        return L[0]*L[1]*L[2]
+
+    k = min_mult(L)
+    L.pop(k[0] + 1)
+    return k[1] + best_mat_mult_time(L)
+
+
+def min_mult(L):
+    mult = {}
+    for i in range(len(L)-2):
+        p = L[i]*L[i+1]*L[i+2]
+        mult[i] = p
+    min_mult = min(mult.items(), key=lambda x: x[1])
+    return min_mult
+
+
